@@ -14,6 +14,7 @@ class Flat extends Component{
                 <div className="flat-picture" style={style}></div>
                 <div className="flat-title"></div>
                 {title}
+               
             </div>
         );
     }
