@@ -23,9 +23,10 @@ class App extends Component {
             </div>
             <div className="flats">
             </div>
-            <div className="map">
+            
           </div>
-         
+          <div className="map">
+          </div>
       </div>
     );
   }
