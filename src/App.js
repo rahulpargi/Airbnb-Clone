@@ -9,7 +9,9 @@ class App extends Component {
     super(props);
     this.state={
       flats:[],
-      selectedFlat:null
+      allFlats:[],
+      selectedFlat:null,
+      search:""
     };
   }
 
@@ -20,7 +22,8 @@ class App extends Component {
     .then((data)=>{
       console.log(data);
       this.setState({
-        flats:data
+        flats:data,
+        allFlats:data
       });
     })
   }
@@ -29,6 +32,13 @@ class App extends Component {
     this.setState({
       selectedFlat:flat
     })
+  }
+  handleSearch=(event)=>{
+    
+    this.setState({
+     search:event.target.value,
+     flats:this.state.allFlats.filter((flat)=> new RegExp(event.target.value,"i").exec(flat.name))
+    });
   }
   render() {
     
@@ -50,6 +60,7 @@ const key="AIzaSyAIW-eWe8hZlWjIc5o3V7wcmI3Z0GTpbS4";
       <div className="app">
           <div className="main">
             <div className="search">
+              <input type="text" placeholder="Search" value={this.state.search} onChange={this.handleSearch}/>
             </div>
             <div className="flats">
               {this.state.flats.map((flat)=>{
@@ -64,7 +75,7 @@ const key="AIzaSyAIW-eWe8hZlWjIc5o3V7wcmI3Z0GTpbS4";
           <GoogleMapReact
           bootstrapURLKeys={{ key:key}}
           center={center}
-          zoom={13}
+          zoom={11}
         >
          {this.state.flats.map((flat)=>{
                 return <Marker key={flat.name} 
